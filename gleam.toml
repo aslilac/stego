@@ -1,0 +1,15 @@
+name = "stego"
+version = "1.0.0"
+licences = ["MIT"]
+description = "Deno.serve for Gleam ✨"
+repository = { type = "github", user = "aslilac", repo = "stego" }
+
+target = "javascript"
+
+[dependencies]
+gleam_javascript = "~> 0.7"
+gleam_http = "~> 3.5"
+gleam_stdlib = "~> 0.34"
+
+[dev-dependencies]
+gleeunit = "~> 1.0"

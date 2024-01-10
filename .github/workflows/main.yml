@@ -1,0 +1,31 @@
+name: main
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["**"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout
+
+      - uses: erlef/setup-beam@v1
+        name: Prepare
+        with:
+          otp-version: "26.0"
+          gleam-version: "0.33"
+
+      - run: gleam format --check
+        name: Format
+
+      - run: gleam test -- -A
+        name: Test
